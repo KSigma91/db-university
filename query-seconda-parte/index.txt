@@ -1,0 +1,9 @@
+Query con JOIN
+
+1.  Selezionare tutti gli studenti iscritti al Corso di Laurea in Economia
+
+    SELECT *
+    FROM `students`
+        JOIN `degrees`
+    WHERE degrees.name = 'Corso di Laurea in Economia'
+    ORDER BY `date_of_birth`  ASC;

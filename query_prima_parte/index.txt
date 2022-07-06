@@ -1,17 +1,22 @@
 1.  Selezionare tutti gli studenti nati nel 1990 (160)
 
-    SELECT `name`, `surname`, `date_of_birth`
+    SELECT *
     FROM `students`
-    WHERE `date_of_birth` LIKE "1990%";
+    WHERE YEAR(`date_of_birth`) = 1990;
 
 2.  Selezionare tutti i corsi che valgono più di 10 crediti (479)
 
-    SELECT `name`, `description`, `cfu`
+    SELECT *
     FROM `courses`
-    WHERE `cfu` > "10";
+    WHERE `cfu` > "10"
+    ORDER BY cfu;
 
 3.  Selezionare tutti gli studenti che hanno più di 30 anni
 
+    SELECT *
+    FROM `students`
+    WHERE TIMESTAMPDIFF(YEAR, `date_of_birth`, CURRENT_DATE()) > 30   // soluzione alt. WHERE `date_of_birth` < DATE_SUB(CURRENT_DATE(), INTERVAL 31 YEAR)
+    ORDER BY `date_of_birth` DESC;
 
 
 4.  Selezionare tutti i corsi del primo semestre del primo anno di un qualsiasi corso di
@@ -38,11 +43,11 @@
 
 7.  Da quanti dipartimenti è composta l'università? (12)
 
-    SELECT `id`, `name`
+    SELECT COUNT(`id`) as departments_count
     FROM `departments`;
 
 8.  Quanti sono gli insegnanti che non hanno un numero di telefono? (50)
 
-    SELECT * 
+    SELECT COUNT(`id`) as count_no_phone 
     FROM `teachers`
     WHERE `phone` IS NULL;
